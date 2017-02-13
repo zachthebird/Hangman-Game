@@ -40,7 +40,7 @@
     <script type="text/javascript">
 
 
-      var possibleWords = ["potato", "symphony", "fidgeting", "crusty", "frolic", "enormous", "finale", "supreme", "cappuccino", "frontal", "unique", "arthritis", "indigenous", "unicorn", "sarsaparilla"];
+    var possibleWords = ["potato", "symphony", "fidgeting", "crusty", "frolic", "enormous", "finale", "supreme", "cappuccino", "frontal", "unique", "arthritis", "indigenous", "unicorn", "sarsaparilla", "nougat", "chalupa", "plumbus", "scribble", "euphemisms", "chronicle", "throng", "adjunct", "emoji", "gazelle", "preemptive", "licorice", "thorough", "enthusiast", "homonym", "juggle", "strength", "jynx", "applaud", "pterodactyl"];
       var actualWord = "";
       var lives = 6;
       var guesses = [];
@@ -72,7 +72,7 @@
           $("#numberlives").html("Guesses Remaining: " + lives);
           $("#wrongGuesses").html( wrongGuesses.join(" ") ) ;
 
-          
+
         }
       })
 
@@ -83,23 +83,23 @@
         console.log("guesses: " + guesses);
         for(i = 0; i < guesses.length; i++)
           for(j = 0; j<blanks.length; j++){
-            
+
             if(guess == actualWord[j]){
               console.log("correct!");
               blanks[j] = guess;           
             } 
             console.log("index of guess: " + actualWord.indexOf(guess) );   
-            
+
           }
           if(actualWord.indexOf(guess) < 0){
             lives -- ;
             wrongGuesses.push(guess);
           }
-          
+
           for(i = 0; i<wrongGuesses.length ; i++){
             $("#imagebox").html("<img src=\"assets/images/Hangman-" + [i + 1] +".png\">");
           }
-          
+
 
           $("#actualWord").html("Current Word: " + blanks.join(' '));
           $("#numberlives").html("Guesses Remaining: " + lives);
