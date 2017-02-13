@@ -14,21 +14,19 @@
   <h1 class="col-lg-12 text-center jumbotron">Hangman Game</h1>
 
   <div class="row">
-    <div class = "col-sm-6">
+    <div class = "col-lg-6">
       <div class = "row">
         <h3 class="jumbotron col-sm-12" id="actualWord" ></h3>
         <h3 class="actualWord"></h3>
         <div class= "text-center" id = "buttons" style = "color : black"></div>
       </div>
       <div class= "row">
-        <h3 class = "col-lg-12 jumbotron" >Incorrect Guesses:</h3>
-        <br>
-        <h3 class = "jumbotron" id="wrongGuesses"></h3>
+        <h3 class = "col-lg-12 jumbotron" id="wrongGuesses">Incorrect Guesses:</h3>
         <h3 class = "col-lg-12 jumbotron" id="numberlives">Guesses Remaining: 6</h3>
       </div>
     </div>
 
-    <div class = "jumbotron col-sm-6 text-center" style = "margin-top: 20px">
+    <div class = "jumbotron col-lg-6 text-center" style = "margin-top: 20px">
       <h3>HANGMAN</h3>
       <div id="imagebox" src="assets/images/Hangman-0.png"><img src="assets/images/Hangman-0.png"></div>
       <button id="reset">reset</button>
@@ -60,72 +58,47 @@
       console.log("splitword: " + splitWord);
 
       $("#reset").on('click', function(){
-        var guess = "";
-        var guesses = [];
-        var blanks = [];
-        var wrongGuesses = [];
-        var lives = 6;
+        guess = "";
+        guesses = [];
+        blanks = [];
+        wrongGuesses = [];
+        lives = 6;
         actualWord = possibleWords[Math.floor(Math.random() * possibleWords.length)];
+        $("#imagebox").html("<img src=\"assets/images/Hangman-0.png\">")
         for (i = 0; i < actualWord.length; i++){
           blanks[i] = "_";
           $("#actualWord").html("Current Word: " + blanks.join(' '));
           $("#numberlives").html("Guesses Remaining: " + lives);
-          $("#wrongGuesses").html( wrongGuesses.join(" ") ) ;
-
-
+          $("#wrongGuesses").html("Incorrect Guesses: " + "<br>" + wrongGuesses.join(" ") ) ;
+        }
+        for(i = 0; i<wrongGuesses.length ; i++){
+            $("#imagebox").html("<img src=\"assets/images/Hangman-" + [i + 1] +".png\">");
         }
       })
 
       document.onkeyup = function(e){
         var guess = (e.key);
-        console.log(guess);
         guesses.push(guess);
-        console.log("guesses: " + guesses);
         for(i = 0; i < guesses.length; i++)
           for(j = 0; j<blanks.length; j++){
-
             if(guess == actualWord[j]){
               console.log("correct!");
               blanks[j] = guess;           
             } 
-            console.log("index of guess: " + actualWord.indexOf(guess) );   
-
           }
-          if(actualWord.indexOf(guess) < 0){
+        if(actualWord.indexOf(guess) < 0){
             lives -- ;
             wrongGuesses.push(guess);
-          }
+        }
 
-          for(i = 0; i<wrongGuesses.length ; i++){
+        for(i = 0; i<wrongGuesses.length ; i++){
             $("#imagebox").html("<img src=\"assets/images/Hangman-" + [i + 1] +".png\">");
-          }
-
-
-          $("#actualWord").html("Current Word: " + blanks.join(' '));
-          $("#numberlives").html("Guesses Remaining: " + lives);
-          $("#wrongGuesses").html( wrongGuesses.join(" ") ) ;
-    // $("#button").on("click", function){
-    //   lives = 7;
-    //   wrongGuesses = [];
-    //   guesses = [];
-    //   blanks = [];
-    //   actualWord = possibleWords[Math.floor(Math.random() * possibleWords.length)];
-    // console.log(actualWord);
-    // for (i = 0; i < actualWord.length; i++){
-    //   blanks[i] = "_";
-    // }
-    
-    console.log("blanks: " + blanks);
-
-  }
-  $(document).ready(function() {
-    $('#field').click(function(e){
-      $(this).focus();
-    });
-    $('#button').click(function(e) {
-      $('#field').trigger('click');
-    });
-  });
+        }
+        $("#actualWord").html("Current Word: " + blanks.join(' '));
+        $("#numberlives").html("Guesses Remaining: " + lives);
+        $("#wrongGuesses").html("Incorrect Guesses: " + "<br>" + wrongGuesses.join(" ") ) ;
+    }
+  
 </script>
 
 
