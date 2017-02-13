@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
   </head>
-  <body class = "text-center">
+  <body class = "text-center" style="background:darkgray">
     <h1 class="col-lg-12 text-center jumbotron">Hangman Game</h1>
 
     <div class="row">
@@ -20,18 +20,15 @@
           <h3 class="actualWord"></h3>
           <div class= "text-center" id = "buttons" style = "color : black"></div>
         </div>
-        <div class= "row jumbotron">
-        <h3 class = "col-lg-12" >Incorrect Guesses:</h3>
+        <div class= "row">
+        <h3 class = "col-lg-12 jumbotron" >Incorrect Guesses:</h3>
         <br>
         <h3 id="wrongGuesses"></h3>
-        </div>
         <h3 class = "col-lg-12 jumbotron" id="numberlives">Guesses Remaining: 6</h3>
-        <div class="row">
-        <h3 class = "col-lg-12 jumbotron">Columns within a column</h3>
         </div>
       </div>
 
-      <div class = "jumbotron col-sm-6 text-center">
+      <div class = "jumbotron col-sm-6 text-center" style = "margin-top: 20px">
         <h3>HANGMAN</h3>
         <div id="imagebox" src="assets/images/Hangman-0.png"><img src="assets/images/Hangman-0.png"></div>
         <button id="reset">reset</button>
@@ -62,6 +59,22 @@
 
     console.log("splitword: " + splitWord);
 
+    $("#reset").on('click', function(){
+      var guess = "";
+      var guesses = [];
+      var blanks = [];
+      var wrongGuesses = [];
+      var lives = 6;
+      actualWord = possibleWords[Math.floor(Math.random() * possibleWords.length)];
+      for (i = 0; i < actualWord.length; i++){
+      blanks[i] = "_";
+      $("#actualWord").html("Current Word: " + blanks.join(' '));
+      $("#numberlives").html("Guesses Remaining: " + lives);
+      $("#wrongGuesses").html( wrongGuesses.join(" ") ) ;
+      
+      
+    }
+    })
 
     document.onkeyup = function(e){
       var guess = (e.key);
