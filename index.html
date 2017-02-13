@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset="UTF-8">
-    <title>Hangman Game</title>
-    <!--  Reset CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<head>
+  <meta charset="UTF-8">
+  <title>Hangman Game</title>
+  <!--  Reset CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-  </head>
-  <body class = "text-center" style="background:darkgray">
-    <h1 class="col-lg-12 text-center jumbotron">Hangman Game</h1>
+</head>
+<body class = "text-center" style="background:darkgray">
+  <h1 class="col-lg-12 text-center jumbotron">Hangman Game</h1>
 
-    <div class="row">
-      <div class = "col-sm-6">
-        <div class = "row">
-          <h3 class="jumbotron col-sm-12" id="actualWord" ></h3>
-          <h3 class="actualWord"></h3>
-          <div class= "text-center" id = "buttons" style = "color : black"></div>
-        </div>
-        <div class= "row">
+  <div class="row">
+    <div class = "col-sm-6">
+      <div class = "row">
+        <h3 class="jumbotron col-sm-12" id="actualWord" ></h3>
+        <h3 class="actualWord"></h3>
+        <div class= "text-center" id = "buttons" style = "color : black"></div>
+      </div>
+      <div class= "row">
         <h3 class = "col-lg-12 jumbotron" >Incorrect Guesses:</h3>
         <br>
-        <h3 id="wrongGuesses"></h3>
+        <h3 class = "jumbotron" id="wrongGuesses"></h3>
         <h3 class = "col-lg-12 jumbotron" id="numberlives">Guesses Remaining: 6</h3>
-        </div>
       </div>
+    </div>
 
-      <div class = "jumbotron col-sm-6 text-center" style = "margin-top: 20px">
-        <h3>HANGMAN</h3>
-        <div id="imagebox" src="assets/images/Hangman-0.png"><img src="assets/images/Hangman-0.png"></div>
-        <button id="reset">reset</button>
-      </div>
+    <div class = "jumbotron col-sm-6 text-center" style = "margin-top: 20px">
+      <h3>HANGMAN</h3>
+      <div id="imagebox" src="assets/images/Hangman-0.png"><img src="assets/images/Hangman-0.png"></div>
+      <button id="reset">reset</button>
+    </div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 
@@ -40,70 +40,70 @@
     <script type="text/javascript">
 
 
-    var possibleWords = ["potato", "symphony", "fidgeting", "crusty", "frolic", "enormous", "finale", "supreme", "cappuccino", "frontal", "unique", "arthritis", "indigenous", "unicorn", "sarsaparilla"];
-    var actualWord = "";
-    var lives = 6;
-    var guesses = [];
-    var blanks = [];
-    var wrongGuesses = [];
-
-    actualWord = possibleWords[Math.floor(Math.random() * possibleWords.length)];
-    console.log(actualWord);
-    for (i = 0; i < actualWord.length; i++){
-      blanks[i] = "_";
-    }
-
-    $("#actualWord").html("Current Word: " + blanks.join(' '));
-
-    var splitWord = actualWord.split("") ;
-
-    console.log("splitword: " + splitWord);
-
-    $("#reset").on('click', function(){
-      var guess = "";
+      var possibleWords = ["potato", "symphony", "fidgeting", "crusty", "frolic", "enormous", "finale", "supreme", "cappuccino", "frontal", "unique", "arthritis", "indigenous", "unicorn", "sarsaparilla"];
+      var actualWord = "";
+      var lives = 6;
       var guesses = [];
       var blanks = [];
       var wrongGuesses = [];
-      var lives = 6;
+
       actualWord = possibleWords[Math.floor(Math.random() * possibleWords.length)];
+      console.log(actualWord);
       for (i = 0; i < actualWord.length; i++){
-      blanks[i] = "_";
+        blanks[i] = "_";
+      }
+
       $("#actualWord").html("Current Word: " + blanks.join(' '));
-      $("#numberlives").html("Guesses Remaining: " + lives);
-      $("#wrongGuesses").html( wrongGuesses.join(" ") ) ;
-      
-      
-    }
-    })
 
-    document.onkeyup = function(e){
-      var guess = (e.key);
-      console.log(guess);
-      guesses.push(guess);
-      console.log("guesses: " + guesses);
-      for(i = 0; i < guesses.length; i++)
-        for(j = 0; j<blanks.length; j++){
+      var splitWord = actualWord.split("") ;
+
+      console.log("splitword: " + splitWord);
+
+      $("#reset").on('click', function(){
+        var guess = "";
+        var guesses = [];
+        var blanks = [];
+        var wrongGuesses = [];
+        var lives = 6;
+        actualWord = possibleWords[Math.floor(Math.random() * possibleWords.length)];
+        for (i = 0; i < actualWord.length; i++){
+          blanks[i] = "_";
+          $("#actualWord").html("Current Word: " + blanks.join(' '));
+          $("#numberlives").html("Guesses Remaining: " + lives);
+          $("#wrongGuesses").html( wrongGuesses.join(" ") ) ;
+
           
-          if(guess == actualWord[j]){
-            console.log("correct!");
-            blanks[j] = guess;           
-          } 
-        console.log("index of guess: " + actualWord.indexOf(guess) );   
-        
         }
-        if(actualWord.indexOf(guess) < 0){
-          lives -- ;
-          wrongGuesses.push(guess);
-      }
-    
-      for(i = 0; i<wrongGuesses.length ; i++){
-        $("#imagebox").html("<img src=\"assets/images/Hangman-" + [i + 1] +".png\">");
-      }
-    
+      })
 
-    $("#actualWord").html("Current Word: " + blanks.join(' '));
-    $("#numberlives").html("Guesses Remaining: " + lives);
-    $("#wrongGuesses").html( wrongGuesses.join(" ") ) ;
+      document.onkeyup = function(e){
+        var guess = (e.key);
+        console.log(guess);
+        guesses.push(guess);
+        console.log("guesses: " + guesses);
+        for(i = 0; i < guesses.length; i++)
+          for(j = 0; j<blanks.length; j++){
+            
+            if(guess == actualWord[j]){
+              console.log("correct!");
+              blanks[j] = guess;           
+            } 
+            console.log("index of guess: " + actualWord.indexOf(guess) );   
+            
+          }
+          if(actualWord.indexOf(guess) < 0){
+            lives -- ;
+            wrongGuesses.push(guess);
+          }
+          
+          for(i = 0; i<wrongGuesses.length ; i++){
+            $("#imagebox").html("<img src=\"assets/images/Hangman-" + [i + 1] +".png\">");
+          }
+          
+
+          $("#actualWord").html("Current Word: " + blanks.join(' '));
+          $("#numberlives").html("Guesses Remaining: " + lives);
+          $("#wrongGuesses").html( wrongGuesses.join(" ") ) ;
     // $("#button").on("click", function){
     //   lives = 7;
     //   wrongGuesses = [];
@@ -117,10 +117,17 @@
     
     console.log("blanks: " + blanks);
 
-    }
-    
-    </script>
-    
+  }
+  $(document).ready(function() {
+    $('#field').click(function(e){
+      $(this).focus();
+    });
+    $('#button').click(function(e) {
+      $('#field').trigger('click');
+    });
+  });
+</script>
 
-  </body>
-  </html>
+
+</body>
+</html>
