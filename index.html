@@ -22,14 +22,14 @@
       </div>
       <div class= "row">
         <h3 class = "col-lg-12 jumbotron" id="wrongGuesses">Incorrect Guesses:</h3>
-        <h3 class = "col-lg-12 jumbotron" id="numberlives">Guesses Remaining: 6</h3>
+        <h3 class = "col-lg-12 jumbotron" id="numberlives">Guesses Remaining: 7</h3>
       </div>
     </div>
 
     <div class = "jumbotron col-lg-6 text-center" style = "margin-top: 20px">
       <h3>HANGMAN</h3>
       <div id="imagebox" src="assets/images/Hangman-0.png"><img src="assets/images/Hangman-0.png"></div>
-      <button id="reset">reset</button>
+      <button id="reset">New Game</button>
     </div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
@@ -40,7 +40,7 @@
 
     var possibleWords = ["potato", "symphony", "fidgeting", "crusty", "frolic", "enormous", "finale", "supreme", "cappuccino", "frontal", "unique", "arthritis", "indigenous", "unicorn", "sarsaparilla", "nougat", "chalupa", "plumbus", "scribble", "euphemisms", "chronicle", "throng", "adjunct", "emoji", "gazelle", "preemptive", "licorice", "thorough", "enthusiast", "homonym", "juggle", "strength", "jynx", "applaud", "pterodactyl"];
       var actualWord = "";
-      var lives = 6;
+      var lives = 7;
       var guesses = [];
       var blanks = [];
       var wrongGuesses = [];
@@ -62,7 +62,7 @@
         guesses = [];
         blanks = [];
         wrongGuesses = [];
-        lives = 6;
+        lives = 7;
         actualWord = possibleWords[Math.floor(Math.random() * possibleWords.length)];
         $("#imagebox").html("<img src=\"assets/images/Hangman-0.png\">")
         for (i = 0; i < actualWord.length; i++){
@@ -93,6 +93,9 @@
 
         for(i = 0; i<wrongGuesses.length ; i++){
             $("#imagebox").html("<img src=\"assets/images/Hangman-" + [i + 1] +".png\">");
+            if(i > 5){
+              $("#imagebox").html("<h2>YOU LOSE!")
+            }
         }
         $("#actualWord").html("Current Word: " + blanks.join(' '));
         $("#numberlives").html("Guesses Remaining: " + lives);
