@@ -28,14 +28,25 @@
     <div class = "jumbotron col-lg-6 text-center game" style = "margin-top: 20px">
       <h3>HANGMAN</h3>
       <div id="imagebox" src="assets/images/Hangman-0.png"><img src="assets/images/Hangman-0.png"></div>
-      <button id="reset" class="button">New Game</button>
+      <button id="reset" class="button" style="margin-left: 264px">New Game</button>
+      <button id="openKeyboard">Open Keyboard (mobile)</button>
+      <input id="hiddenInput" style="visibility: hidden;">
     </div>
   </div>
-  <div class="well page-footer">© Zachary Bird 2017</div>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  
+  
+  <div class="well page-footer" style="position: bottom 0">© Zachary Bird 2017</div>
 
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+ 
 
-    <script type="text/javascript">
+  <script type="text/javascript">
+    document.getElementById('openKeyboard').addEventListener('click', function(){
+        var inputElement = document.getElementById('hiddenInput');
+        inputElement.style.visibility = 'visible'; // unhide the input
+        inputElement.focus(); // focus on it so keyboard pops
+        inputElement.style.visibility = 'hidden'; // hide it again
+      });
     $(".page-footer").css("margin", 0);
     $(".page-footer").css("color", "black");
     $(".page-footer").css("background-color", "lightgray");
